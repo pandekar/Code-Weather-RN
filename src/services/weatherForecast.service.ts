@@ -36,7 +36,7 @@ const getWeatherForecast = async ({
 }: GeoLocationData): Promise<WeatherDataInformation> => {
   try {
     const {data} = await axios.get(
-      `${BASE_URL}forecast?lat=${latitude}&lon=${longitude}&cnt=40&appid=${API_KEY}`,
+      `${BASE_URL}forecast?lat=${latitude}&lon=${longitude}&cnt=40&appid=${API_KEY}&units=metric`,
     );
     const weatherData = getWeatherData(data);
 

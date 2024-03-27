@@ -3,7 +3,7 @@ export type GeoLocationData = {
   longitude: number;
 };
 
-type City = {
+export type City = {
   id: number;
   name: string;
   coord: {
@@ -42,7 +42,7 @@ type Wind = {
   gust: number;
 };
 
-type ForecastList = {
+export type ForecastList = {
   dt: number;
   main: ForecastListMain;
   weather: Array<WeatherData>;
