@@ -18,7 +18,7 @@ export const initialState: InitialState = {
     sunrise: 0,
     sunset: 0,
   },
-  weather: [
+  weatherList: [
     {
       dt: 0,
       main: {
@@ -59,6 +59,7 @@ export const initialState: InitialState = {
       dt_txt: '',
     },
   ],
+  weatherForecasts: [],
 };
 
 const weatherReducer = (state = initialState, action: ReduxActionValue) => {
@@ -74,7 +75,8 @@ const weatherReducer = (state = initialState, action: ReduxActionValue) => {
           ...state,
           loading: false,
           city: action.data.city,
-          weather: action.data.weatherForecastList,
+          weatherList: action.data.weatherList,
+          weatherForecasts: action.data.weatherForecasts,
         };
       }
     default:

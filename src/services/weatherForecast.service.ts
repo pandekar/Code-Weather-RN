@@ -4,10 +4,52 @@ import type {
   GeoLocationData,
   WeatherForecastData,
   WeatherDataInformation,
+  ForecastList,
 } from '../index.types';
 
 const BASE_URL = 'http://api.openweathermap.org/data/2.5/';
 const API_KEY = '01eefb1e65deb044d3ee72e3b5cd5ef3';
+
+const getWeatherForecastList = (
+  forecasts: Array<ForecastList>,
+): Array<ForecastList> => {
+  // Get the current day and time
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinutes = now.getMinutes();
+
+  // Create a new Date object with the same day but specific time (current time)
+  const specificTime = new Date(now);
+  specificTime.setHours(currentHour, currentMinutes, 0, 0);
+
+  // Find the closest forecast for each day
+  let closestForecastsByDay = [];
+  let nextDay = new Date(specificTime);
+  while (closestForecastsByDay.length < 6) {
+    const closestForecast = forecasts.reduce((acc: ForecastList, curr) => {
+      const forecastDate = new Date(curr.dt_txt);
+      if (forecastDate.toLocaleDateString() === nextDay.toLocaleDateString()) {
+        if (
+          !acc ||
+          Math.abs(curr.dt - specificTime.getTime() / 1000) <
+            Math.abs(acc.dt - specificTime.getTime() / 1000)
+        ) {
+          acc = curr;
+        }
+      }
+      return acc;
+    }, null);
+
+    if (closestForecast) {
+      closestForecastsByDay.push(closestForecast);
+    }
+
+    // Move to the next day
+    nextDay.setDate(nextDay.getDate() + 1);
+  }
+
+  return closestForecastsByDay;
+};
 
 /**
  * get weather and location data
@@ -17,10 +59,12 @@ const API_KEY = '01eefb1e65deb044d3ee72e3b5cd5ef3';
 const getWeatherData = (
   weatherForecastData: WeatherForecastData,
 ): WeatherDataInformation => {
-  const {list: weatherForecastList, city} = weatherForecastData;
+  const {list: weatherList, city} = weatherForecastData;
+  const weatherForecasts = getWeatherForecastList(weatherList);
 
   return {
-    weatherForecastList,
+    weatherList,
+    weatherForecasts,
     city,
   };
 };

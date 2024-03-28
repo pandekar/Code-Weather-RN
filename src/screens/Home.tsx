@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {ScrollView, View, Text} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {getWeatherForecast} from '../services';
@@ -8,8 +8,31 @@ import {
   loadingApplication,
 } from '../redux/actions/actions';
 import {fetchLocation} from '../utils';
+import styles from './Home.styles';
+import {
+  Header,
+  WeatherHeadline,
+  AdditionalInfo,
+  HorizontalSlider,
+  VerticalWeatherList
+} from '../components';
+
+import type {Dispatch} from 'redux';
 
 import type {InitialState} from '../index.types';
+
+/**
+ * fetch weather data
+ * @param {Dispatch} dispatch - dispatch function
+ * @returns {Promise<void>} - promise void
+ */
+const fetchWeatherData = async (dispatch: Dispatch): Promise<void> => {
+  const location = await fetchLocation();
+
+  getWeatherForecast(location).then(data => {
+    dispatch(initiateWeatherData(data));
+  });
+};
 
 /**
  * Home
@@ -18,33 +41,37 @@ import type {InitialState} from '../index.types';
 const Home = (): React.JSX.Element => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch(loadingApplication());
-
-    const fetchWeatherData = async () => {
-      const location = await fetchLocation();
-
-      getWeatherForecast(location).then(data => {
-        dispatch(initiateWeatherData(data));
-      });
-    };
-
-    fetchWeatherData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   let weatherForecast = useSelector(
     (state: {weather: InitialState}) => state.weather,
   );
 
+  let appLoading = useSelector(
+    (state: {weather: InitialState}) => state.weather.loading,
+  );
+
+  React.useEffect(() => {
+    dispatch(loadingApplication());
+
+    fetchWeatherData(dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <View>
-      {weatherForecast.loading ? (
-        <Text>LOADING</Text>
+    <View style={styles.homeContainer}>
+      {appLoading ? (
+        <Text>Fetching weather...</Text>
       ) : (
         <View>
-          <Text>{weatherForecast.city.name}</Text>
-          <Text>{weatherForecast.city.country}</Text>
+          <Header city={weatherForecast.city} />
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <WeatherHeadline weather={weatherForecast.weatherList} />
+            <AdditionalInfo
+              weather={weatherForecast.weatherList}
+              city={weatherForecast.city}
+            />
+            <HorizontalSlider weather={weatherForecast.weatherList} />
+            <VerticalWeatherList weather={weatherForecast.weatherForecasts} />
+          </ScrollView>
         </View>
       )}
     </View>

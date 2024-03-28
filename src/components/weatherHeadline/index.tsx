@@ -19,7 +19,9 @@ const WeatherHeadline = ({weather}: Props): React.JSX.Element => {
           <Icon name="cloud" size={30} color="black" />
         </View>
         <View>
-          <Text style={styles.mainWeatherTextStyle}>{weather[0].weather[0].main}</Text>
+          <Text style={styles.mainWeatherTextStyle}>
+            {weather[0].weather[0].main}
+          </Text>
           <Text>{weather[0].weather[0].description}</Text>
         </View>
       </View>

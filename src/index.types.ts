@@ -70,15 +70,14 @@ export type WeatherForecastData = {
 };
 
 export type WeatherDataInformation = {
-  weatherForecastList: Array<ForecastList>;
+  weatherList: Array<ForecastList>;
+  weatherForecasts: Array<ForecastList>;
   city: City;
 };
 
 export type InitialState = {
   loading: boolean;
-  city: City;
-  weather: Array<ForecastList>;
-};
+} & WeatherDataInformation;
 
 export type ReduxActionValue = {
   type: string;
