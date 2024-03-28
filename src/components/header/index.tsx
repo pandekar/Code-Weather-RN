@@ -15,7 +15,7 @@ const Header = ({city}: Props): React.JSX.Element => (
   <View style={styles.header}>
     <View style={styles.leftContainer}>
       <View style={styles.iconContainer}>
-        <Icon name="magnifying-glass" size={25} color="black" />
+        <Icon name="location-dot" size={25} color="black" />
       </View>
       <Text style={styles.leftText}>
         {city.name}, {city.country}

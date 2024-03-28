@@ -4,6 +4,7 @@ import AdditionalInfo from './additionalInfo';
 import HorizontalSlider from './horizontalSlider';
 import VerticalWeatherList from './verticalWeaherList';
 import WeatherIcon from './weatherIcon';
+import LoadingMask from './loadingMask';
 
 export {
   Header,
@@ -12,4 +13,5 @@ export {
   HorizontalSlider,
   VerticalWeatherList,
   WeatherIcon,
+  LoadingMask,
 };

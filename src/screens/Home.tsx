@@ -15,6 +15,7 @@ import {
   AdditionalInfo,
   HorizontalSlider,
   VerticalWeatherList,
+  LoadingMask,
 } from '../components';
 
 import type {Dispatch} from 'redux';
@@ -59,7 +60,7 @@ const Home = (): React.JSX.Element => {
   return (
     <View style={styles.homeContainer}>
       {appLoading ? (
-        <Text>Fetching weather...</Text>
+        <LoadingMask />
       ) : (
         // scrollview needs to wrap with <> instead of <View>
         <>

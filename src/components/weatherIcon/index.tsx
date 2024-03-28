@@ -56,7 +56,7 @@ const WeatherIcon = (weatherId: number): React.JSX.Element => {
       iconName = 'cloud';
       break;
     default:
-      iconName = 'cloud';
+      iconName = 'cloud-sun';
   }
 
   return <Icon name={iconName} size={30} color="black" />;
