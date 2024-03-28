@@ -3,6 +3,7 @@ import WeatherHeadline from './weatherHeadline';
 import AdditionalInfo from './additionalInfo';
 import HorizontalSlider from './horizontalSlider';
 import VerticalWeatherList from './verticalWeaherList';
+import WeatherIcon from './weatherIcon';
 
 export {
   Header,
@@ -10,4 +11,5 @@ export {
   AdditionalInfo,
   HorizontalSlider,
   VerticalWeatherList,
+  WeatherIcon,
 };

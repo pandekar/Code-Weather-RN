@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome6';
 
 import styles from './horizontalSlider.styles';
 import {getDateTime} from '../../utils';
+import {WeatherIcon} from '..';
 
 import type {Props} from './horizontalSlider.types';
 
@@ -20,9 +20,7 @@ const HorizontalSlider = ({weather: weathers}: Props): React.JSX.Element => (
           <View>
             <Text>{`${getDateTime(weather.dt).getHours()}:00`}</Text>
           </View>
-          <View>
-            <Icon name="cloud" size={30} color="black" />
-          </View>
+          <View>{WeatherIcon(weather.weather[0].id)}</View>
           <View>
             <Text style={styles.textStyle}>
               {Math.floor(weather.main.temp)} °C

@@ -14,7 +14,7 @@ import {
   WeatherHeadline,
   AdditionalInfo,
   HorizontalSlider,
-  VerticalWeatherList
+  VerticalWeatherList,
 } from '../components';
 
 import type {Dispatch} from 'redux';

@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome6';
 
 import styles from './WeatherHeadline.styles';
+import {WeatherIcon} from '..';
 
 import type {Props} from './WeatherHeadline.types';
 
@@ -16,7 +16,7 @@ const WeatherHeadline = ({weather}: Props): React.JSX.Element => {
     <View style={styles.weatherHeadlineContainer}>
       <View style={styles.cloudAndWindContainer}>
         <View style={styles.cloudContainer}>
-          <Icon name="cloud" size={30} color="black" />
+          {WeatherIcon(weather[0].weather[0].id)}
         </View>
         <View>
           <Text style={styles.mainWeatherTextStyle}>

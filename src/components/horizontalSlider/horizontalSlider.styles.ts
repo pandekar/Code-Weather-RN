@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flex: 1,
     marginHorizontal: 8,
-    gap: 5,
+    gap: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
