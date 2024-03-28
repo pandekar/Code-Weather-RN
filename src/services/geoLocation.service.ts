@@ -20,8 +20,6 @@ const requestLocationPermission = async (): Promise<GeoLocationData | null> => {
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('Location permission granted');
-
       return new Promise((resolve, reject) => {
         Geolocation.getCurrentPosition(
           (success: any) => {
@@ -38,7 +36,6 @@ const requestLocationPermission = async (): Promise<GeoLocationData | null> => {
         );
       });
     } else {
-      console.log('Location permission denied');
       return null;
     }
   } catch (err) {
