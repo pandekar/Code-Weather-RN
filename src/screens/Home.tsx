@@ -61,7 +61,8 @@ const Home = (): React.JSX.Element => {
       {appLoading ? (
         <Text>Fetching weather...</Text>
       ) : (
-        <View>
+        // scrollview needs to wrap with <> instead of <View>
+        <>
           <Header city={weatherForecast.city} />
           <ScrollView showsVerticalScrollIndicator={false}>
             <WeatherHeadline weather={weatherForecast.weatherList} />
@@ -72,7 +73,7 @@ const Home = (): React.JSX.Element => {
             <HorizontalSlider weather={weatherForecast.weatherList} />
             <VerticalWeatherList weather={weatherForecast.weatherForecasts} />
           </ScrollView>
-        </View>
+        </>
       )}
     </View>
   );

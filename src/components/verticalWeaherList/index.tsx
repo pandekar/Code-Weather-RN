@@ -7,7 +7,12 @@ import {getDateFromText} from '../../utils';
 import type {Props} from './verticalWeatherList.types';
 import type {ForecastList} from '../../index.types';
 
-const VerticalWeatherList = ({weather: weathers}: Props) => (
+/**
+ * vertical weather list
+ * @param {Props} props - props
+ * @returns {React.JSX.Element} - component
+ */
+const VerticalWeatherList = ({weather: weathers}: Props): React.JSX.Element => (
   <View style={styles.container}>
     {weathers.map((item: ForecastList) => (
       <View key={item.dt} style={styles.forecastContainer}>
