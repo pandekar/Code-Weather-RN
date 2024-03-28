@@ -15,16 +15,19 @@ import type {ForecastList} from '../../index.types';
 const VerticalWeatherList = ({weather: weathers}: Props): React.JSX.Element => (
   <View style={styles.container}>
     {weathers.map((item: ForecastList) => (
-      <View key={item.dt} style={styles.forecastContainer}>
-        <View>
-          <Text style={styles.textStyle}>{getDateFromText(item.dt_txt)}</Text>
+      <View key={item.dt}>
+        <View style={styles.forecastContainer}>
+          <View>
+            <Text style={styles.textStyle}>{getDateFromText(item.dt_txt)}</Text>
+          </View>
+          <View>
+            <Text style={styles.textStyle}>
+              {item.main.temp_max.toFixed(0)} / {item.main.temp_min.toFixed(0)}
+              °C
+            </Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.textStyle}>
-            {item.main.temp_max.toFixed(0)} / {item.main.temp_min.toFixed(0)}
-            °C
-          </Text>
-        </View>
+        <View style={styles.separatorLine} />
       </View>
     ))}
   </View>

@@ -64,7 +64,12 @@ const Home = (): React.JSX.Element => {
         // scrollview needs to wrap with <> instead of <View>
         <>
           <Header city={weatherForecast.city} />
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            alwaysBounceHorizontal={false}
+            alwaysBounceVertical={false}
+            bounces={false}
+            overScrollMode="never">
             <WeatherHeadline weather={weatherForecast.weatherList} />
             <AdditionalInfo
               weather={weatherForecast.weatherList}
